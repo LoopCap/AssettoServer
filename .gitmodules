@@ -1,0 +1,3 @@
+[submodule "RaceTrackerPlugin"]
+	path = RaceTrackerPlugin
+	url = git@github.com:LoopCap/race_tracker_plugin.git
