@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../schemas/plugin_race_tracker_cfg.schema.json
+
+# RaceTrackerPlugin Reference Configuration
+# This file serves as an overview of all possible options with their default values.
+
+# API endpoint
+ApiEndpoint: http://localhost:3333
+# API key
+ApiKey: 1234567890
+# The unique ID that will be sent as part of the API POST request
+ServerId: ''
+# The game slug
+Game: assetto-corsa
+# The game event id
+RaceId: ''

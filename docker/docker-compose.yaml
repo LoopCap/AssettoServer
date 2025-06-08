@@ -1,9 +1,10 @@
-version: "3.9"
-
 services:
   assetto-server:
-    image: compujuckel/assettoserver:latest
-    container_name: AssettoServer
+    # build:
+    #   context: ../
+    #   dockerfile: docker/Dockerfile
+    # container_name: as
+    image: ghcr.io/loopcap/assettoserver:latest
     ports:
       - "9600:9600"
       - "9600:9600/udp"
@@ -12,4 +13,8 @@ services:
       - ./data/:/data
     environment:
       - TZ=Europe/Berlin
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     restart: always
+
+

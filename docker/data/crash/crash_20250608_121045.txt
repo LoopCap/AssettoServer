@@ -1,0 +1,543 @@
+# AssettoServer Crash Report generated on 06/08/2025 12:10
+Server Version: 0.0.0-alpha.0  
+Operating System: Unix 6.10.14.0 (X64)  
+Content Manager: No  
+
+## Exception
+```
+System.IO.FileLoadException: Could not load file or assembly '/data/plugins/RaceTrackerPlugin/RaceTrackerPlugin.dll'. The assembly architecture is not compatible with the current process architecture.
+File name: '/data/plugins/RaceTrackerPlugin/RaceTrackerPlugin.dll'
+   at System.Runtime.Loader.AssemblyLoadContext.LoadFromAssemblyPath(String assemblyPath)
+   at McMaster.NETCore.Plugins.Loader.ManagedLoadContext.LoadAssemblyFromFilePath(String path)
+   at McMaster.NETCore.Plugins.PluginLoader.LoadDefaultAssembly()
+   at AssettoServer.Server.Plugin.AvailablePlugin.Load() in AssettoServer/Server/Plugin/AvailablePlugin.cs:line 20
+   at AssettoServer.Server.Plugin.ACPluginLoader.LoadPlugin(String name) in AssettoServer/Server/Plugin/ACPluginLoader.cs:line 90
+   at AssettoServer.Server.Plugin.ACPluginLoader.LoadPlugins(List`1 plugins) in AssettoServer/Server/Plugin/ACPluginLoader.cs:line 79
+   at AssettoServer.Startup.ConfigureServices(IServiceCollection services) in AssettoServer/Startup.cs:line 170
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureServicesBuilder.InvokeCore(Object instance, IServiceCollection services)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostBuilder.UseStartup(Type startupType, HostBuilderContext context, IServiceCollection services, Object instance)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostBuilder.<>c__DisplayClass8_0`1.<UseStartup>g__ConfigureStartup|0(HostBuilderContext context, IServiceCollection services)
+   at Microsoft.Extensions.Hosting.HostBuilder.InitializeServiceProvider()
+   at Microsoft.Extensions.Hosting.HostBuilder.Build()
+   at AssettoServer.Program.RunServerAsync(String preset, String serverCfgPath, String entryListPath, Boolean useVerboseLogging, CancellationToken token) in AssettoServer/Program.cs:line 171
+   at System.Runtime.Loader.AssemblyLoadContext.LoadFromAssemblyPath(String assemblyPath)
+   at McMaster.NETCore.Plugins.Loader.ManagedLoadContext.LoadAssemblyFromFilePath(String path)
+   at McMaster.NETCore.Plugins.PluginLoader.LoadDefaultAssembly()
+   at AssettoServer.Server.Plugin.AvailablePlugin.Load() in AssettoServer/Server/Plugin/AvailablePlugin.cs:line 20
+   at AssettoServer.Server.Plugin.ACPluginLoader.LoadPlugin(String name) in AssettoServer/Server/Plugin/ACPluginLoader.cs:line 90
+   at AssettoServer.Server.Plugin.ACPluginLoader.LoadPlugins(List`1 plugins) in AssettoServer/Server/Plugin/ACPluginLoader.cs:line 79
+   at AssettoServer.Startup.ConfigureServices(IServiceCollection services) in AssettoServer/Startup.cs:line 170
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureServicesBuilder.InvokeCore(Object instance, IServiceCollection services)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostBuilder.UseStartup(Type startupType, HostBuilderContext context, IServiceCollection services, Object instance)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostBuilder.<>c__DisplayClass8_0`1.<UseStartup>g__ConfigureStartup|0(HostBuilderContext context, IServiceCollection services)
+   at Microsoft.Extensions.Hosting.HostBuilder.InitializeServiceProvider()
+   at Microsoft.Extensions.Hosting.HostBuilder.Build()
+   at AssettoServer.Program.RunServerAsync(String preset, String serverCfgPath, String entryListPath, Boolean useVerboseLogging, CancellationToken token) in AssettoServer/Program.cs:line 171
+```
+
+## extra_cfg.yml
+```yml
+# yaml-language-server: $schema=schemas/extra_cfg.schema.json
+
+# Override minimum CSP version required to join this server. Leave this empty to not require CSP.
+MinimumCSPVersion: 1937
+# Enable Steam ticket validation. Requires CSP 0.1.75+ and a recent version of Content Manager
+UseSteamAuth: false
+# List of DLC App IDs that are required to join. Steam auth must be enabled. Possible values: https://steamdb.info/app/244210/dlc/
+ValidateDlcOwnership: []
+# Enable protection against cheats/hacks. 0 = No protection. 1 = Block all public cheats as of 2023-11-18 (ClientSecurityPlugin and CSP 0.2.0+ required)
+MandatoryClientSecurityLevel: 0
+# Force headlights on for all cars
+ForceLights: false
+# Enable usage of /resetcar to teleport the player to the closest spline point. Requires CSP v0.2.3-preview47 or later
+EnableCarReset: false
+# Enable vanilla server voting for: Session skip; Session restart
+EnableSessionVote: true
+# Enable vanilla server voting to kick a player
+EnableKickPlayerVote: true
+# Minimum number of connected players for session and kick voting to work. Default is 5
+VoteKickMinimumConnectedPlayers: 3
+# Enable global usage of DRS. Recommended to disable for Qualification and Race sessions
+EnableGlobalDrs: true
+# Enable unlimited usage of Push-to-Pass. Recommended to disable for Qualification and Race sessions
+EnableUnlimitedP2P: true
+# Distance for network optimizations. Players outside of this range will send less updates to reduce network traffic
+NetworkBubbleDistance: 500
+# Refresh rate for players outside of the network bubble
+OutsideNetworkBubbleRefreshRateHz: 4
+# Enable server details in CM. Required for server description
+EnableServerDetails: true
+# Server description shown in Content Manager. EnableServerDetails must be on
+ServerDescription: ''
+# Link server time to real map time. For correct timezones there must be an entry for the map here: https://github.com/ac-custom-shaders-patch/acc-extension-config/blob/master/config/data_track_params.ini
+EnableRealTime: false
+# Enable new CSP weather handling. Allows rain and smooth weather transitions. Requires CSP 0.1.76+
+EnableWeatherFx: true
+# Lock server date to real date. This stops server time "running away" when using a high time multiplier, so that in-game sunrise/sunset times are based on the current date
+LockServerDate: true
+# Reduce track grip when the track is wet. This is much worse than proper CSP rain physics but allows you to run clients with public/Patreon CSP at the same time
+RainTrackGripReductionPercent: 0
+# Enable AI traffic
+EnableAi: false
+# List of plugins to enable
+EnablePlugins: 
+  - RaceTrackerPlugin
+# Ignore some common configuration errors. More info: https://assettoserver.org/docs/common-configuration-errors
+IgnoreConfigurationErrors:
+  MissingCarChecksums: false
+  MissingTrackParams: false
+  UnsafeAdminWhitelist: false
+# Enable CSP client messages feature. Requires CSP 0.1.77+
+EnableClientMessages: true
+# Enable CSP UDP client messages feature. Required for VR head/hand syncing. Requires CSP 0.2.0+
+EnableUdpClientMessages: false
+# Enable CSP custom position updates. This is an improved version of batched position updates, reducing network traffic even further. CSP 0.1.77+ required
+EnableCustomUpdate: true
+# Maximum time a player can spend on the loading screen before being disconnected
+PlayerLoadingTimeoutMinutes: 10
+# Maximum time the server will wait for a checksum response before disconnecting the player
+PlayerChecksumTimeoutSeconds: 40
+# Port to control the server using Source RCON protocol. 0 to disable.
+RconPort: 0
+# Force clients to use track params (coordinates, time zone) specified on the server. CSP 0.1.79+ required
+ForceServerTrackParams: false
+# Allow cars to have multiple data checksums. Instead of a single checksummed data.acd, you can have multiple data*.acd files in the car folder and players can join with any of these files
+EnableAlternativeCarChecksums: false
+# Enable the AC UDP plugin interface compatible with Kunos acServer plugins
+EnableLegacyPluginInterface: false
+# List of URLs for custom loading screen images. A random image will be picked from this list. Requires CSP 0.2.0+ and a recent version of Content Manager
+LoadingImageUrls: 
+# Anonymize player IP addresses in outputs
+RedactIpAddresses: true
+# Name and path of file-based user groups
+UserGroups:
+  default_blacklist: blacklist.txt
+  default_whitelist: whitelist.txt
+  default_admins: admins.txt
+# Name of user group to be used for blacklist
+BlacklistUserGroup: default_blacklist
+# Name of user group to be used for whitelist
+WhitelistUserGroup: default_whitelist
+# Name of user group to be used for admins
+AdminUserGroup: default_admins
+# Allow a user group to execute specific admin commands
+UserGroupCommandPermissions: 
+AiParams:
+  # Automatically assign traffic cars based on the car folder name
+  AutoAssignTrafficCars: true
+  # Radius around a player in which AI cars won't despawn
+  PlayerRadiusMeters: 200
+  # Offset the player radius in direction of the velocity of the player so AI cars will despawn earlier behind a player
+  PlayerPositionOffsetMeters: 100
+  # AFK timeout for players. Players who are AFK longer than this won't spawn AI cars
+  PlayerAfkTimeoutSeconds: 10
+  # Maximum distance to the AI spline for a player to spawn AI cars. This helps with parts of the map without traffic so AI cars won't spawn far away from players
+  MaxPlayerDistanceToAiSplineMeters: 7
+  # Minimum amount of spline points in front of a player where AI cars will spawn
+  MinSpawnDistancePoints: 100
+  # Maximum amount of spline points in front of a player where AI cars will spawn
+  MaxSpawnDistancePoints: 400
+  # Minimum distance between AI cars
+  MinAiSafetyDistanceMeters: 20
+  # Maximum distance between AI cars
+  MaxAiSafetyDistanceMeters: 70
+  # Minimum spawn distance for AI states of the same car slot. If you set this too low you risk AI states despawning or AI states becoming invisible for some players when multiple states are close together
+  StateSpawnDistanceMeters: 1000
+  # Minimum distance between AI states of the same car slot. If states get closer than this one of them will be forced to despawn
+  MinStateDistanceMeters: 200
+  # Minimum spawn distance to players
+  SpawnSafetyDistanceToPlayerMeters: 150
+  # Minimum time in which a newly spawned AI car cannot despawn
+  MinSpawnProtectionTimeSeconds: 4
+  # Maximum time in which a newly spawned AI car cannot despawn
+  MaxSpawnProtectionTimeSeconds: 8
+  # Minimum time an AI car will stop/slow down after a collision
+  MinCollisionStopTimeSeconds: 1
+  # Maximum time an AI car will stop/slow down after a collision
+  MaxCollisionStopTimeSeconds: 3
+  # Default maximum AI speed. This is not an absolute maximum and can be overridden with RightLaneOffsetKph and MaxSpeedVariationPercent
+  MaxSpeedKph: 80
+  # Speed offset for right lanes. Will be added to MaxSpeedKph
+  RightLaneOffsetKph: 10
+  # Maximum speed variation
+  MaxSpeedVariationPercent: 0.15
+  # Soft player limit, the server will stop accepting new players when this many players are reached. Use this to ensure a minimum amount of AI cars. 0 to disable.
+  MaxPlayerCount: 0
+  # Hide AI car nametags and make them invisible on the minimap. Broken on CSP versions < 0.1.78
+  HideAiCars: true
+  # Lane width for adjacent lane detection
+  LaneWidthMeters: 3
+  # Enable two way traffic. This will allow AI cars to spawn in lanes with the opposite direction of travel to the player.
+  TwoWayTraffic: false
+  # Enable traffic spawning if the player is driving the wrong way. Only takes effect when TwoWayTraffic is set to false.
+  WrongWayTraffic: true
+  # Name prefix for AI cars. Names will be in the form of '<NamePrefix> <SessionId>'
+  NamePrefix: Traffic
+  # Ignore obstacles for some time if the AI car is stopped for longer than x seconds
+  IgnoreObstaclesAfterSeconds: 10
+  # Dynamic (hourly) traffic density. List must have exactly 24 entries in the format [0.2, 0.5, 1, 0.7, ...]
+  HourlyTrafficDensity: 
+  # Apply some smoothing to AI spline camber
+  SmoothCamber: true
+  # Update interval for AI spawn point finder
+  AiBehaviorUpdateIntervalHz: 2
+  # Enable AI car headlights during the day
+  EnableDaytimeLights: false
+  # AI cars inside these areas will ignore all player obstacles
+  IgnorePlayerObstacleSpheres: 
+  # Override some settings for newly spawned cars based on the number of lanes
+  LaneCountSpecificOverrides: {}
+  # Override some settings for specific car models
+  CarSpecificOverrides: []
+  # Default AI car deceleration for obstacle/collision detection (m/s^2)
+  DefaultDeceleration: 8.5
+  # Default AI car acceleration for obstacle/collision detection (m/s^2)
+  DefaultAcceleration: 2.5
+  # AI spline height offset. Use this if the AI spline is too close to the ground
+  SplineHeightOffsetMeters: 0
+  # AI cornering speed factor. Lower = AI cars will drive slower around corners.
+  CorneringSpeedFactor: 0.65
+  # AI cornering brake distance factor. Lower = AI cars will brake later for corners.
+  CorneringBrakeDistanceFactor: 3
+  # AI cornering brake force factor. This is multiplied with DefaultDeceleration. Lower = AI cars will brake less hard for corners.
+  CorneringBrakeForceFactor: 0.5
+  # Apply scale to some traffic density related settings. Increasing this DOES NOT magically increase your traffic density, it is dependent on your other settings. Values higher than 1 not recommended.
+  TrafficDensity: 1
+  # Tyre diameter of AI cars in meters, shouldn't have to be changed unless some cars are creating lots of smoke.
+  TyreDiameterMeters: 0.65
+
+```
+
+## server_cfg.ini
+```ini
+[SERVER]
+SLEEP_TIME=1
+QUALIFY_MAX_WAIT_PERC=120
+RACE_EXTRA_LAP=0
+REVERSED_GRID_RACE_POSITIONS=0
+RACE_OVER_TIME=30
+RESULT_SCREEN_TIME=60
+NAME=SimCap | Imola | 24hours Open
+ADMIN_PASSWORD=redacted
+REGISTER_TO_LOBBY=1
+LOOP_MODE=1
+PICKUP_MODE_ENABLED=1
+LOCKED_ENTRY_LIST=1
+MAX_CLIENTS=24
+UDP_PORT=9600
+TCP_PORT=9600
+HTTP_PORT=8081
+CLIENT_SEND_INTERVAL_HZ=18
+NUM_THREADS=2
+TRACK=csp/0/../imola
+CONFIG_TRACK=
+CARS=
+ABS_ALLOWED=1
+TC_ALLOWED=1
+STABILITY_ALLOWED=0
+AUTOCLUTCH_ALLOWED=0
+TYRE_BLANKETS_ALLOWED=1
+FORCE_VIRTUAL_MIRROR=1
+FUEL_RATE=100
+DAMAGE_MULTIPLIER=15
+TYRE_WEAR_RATE=100
+ALLOWED_TYRES_OUT=2
+MAX_BALLAST_KG=0
+START_RULE=0
+RACE_GAS_PENALTY_DISABLED=0
+SUN_ANGLE=-24
+TIME_OF_DAY_MULT=1
+KICK_QUORUM=85
+VOTING_QUORUM=80
+VOTE_DURATION=20
+BLACKLIST_MODE=1
+MAX_CONTACTS_PER_KM=-1
+WELCOME_MESSAGE=cfg/welcome.txt
+
+[PRACTICE]
+NAME=Practice
+TIME=5
+IS_OPEN=1
+
+[QUALIFY]
+NAME=Qualification
+TIME=5
+IS_OPEN=1
+
+[RACE]
+NAME=Race
+TIME=5
+IS_OPEN=2
+WAIT_TIME=30
+LAPS=0
+
+[DATA]
+WELCOME_PATH=cfg/welcome.txt
+
+[FTP]
+LINUX=0
+
+[WEATHER_0]
+GRAPHICS=3_clear
+BASE_TEMPERATURE_AMBIENT=18
+BASE_TEMPERATURE_ROAD=6
+VARIATION_AMBIENT=2
+VARIATION_ROAD=1
+WIND_BASE_SPEED_MIN=0
+WIND_BASE_SPEED_MAX=0
+WIND_BASE_DIRECTION=0
+WIND_VARIATION_DIRECTION=0
+
+
+```
+
+## entry_list.ini
+```ini
+[CAR_0]
+MODEL=rss_gtm_aero_v10_evo2
+SKIN=00_sneakers_46
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+[CAR_1]
+MODEL=rss_gtm_aero_v10_evo2
+SKIN=01_skechers_32
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+[CAR_2]
+MODEL=rss_gtm_aero_v10_evo2
+SKIN=02_rss_sport_11
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+[CAR_3]
+MODEL=rss_gtm_akuro_v6_evo2
+SKIN=01_drona_44
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+[CAR_4]
+MODEL=rss_gtm_akuro_v6_evo2
+SKIN=02_italracing_93
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+[CAR_5]
+MODEL=rss_gtm_bayer_v8
+SKIN=00_rss_special_17
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+[CAR_6]
+MODEL=rss_gtm_bayer_v8
+SKIN=03_rss_blue_dgt
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+[CAR_7]
+MODEL=rss_gtm_furiano_96_v6
+SKIN=00_silver_54
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+[CAR_8]
+MODEL=rss_gtm_furiano_96_v6
+SKIN=03_verstappen_69
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+[CAR_9]
+MODEL=rss_gtm_hyperion_v8
+SKIN=00_factory_65
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+[CAR_10]
+MODEL=rss_gtm_hyperion_v8
+SKIN=04_racesphere
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+[CAR_11]
+MODEL=rss_gtm_lanzo_v10
+SKIN=16_skylinedesign
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+[CAR_12]
+MODEL=rss_gtm_lanzo_v10
+SKIN=96_icmdesigns
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+[CAR_13]
+MODEL=rss_gtm_lanzo_v10_evo2
+SKIN=01_veldfield_52
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+[CAR_14]
+MODEL=rss_gtm_lanzo_v10_evo2
+SKIN=02_husk_27
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+[CAR_15]
+MODEL=rss_gtm_lux_v8
+SKIN=01_reily_martinez_14
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+[CAR_16]
+MODEL=rss_gtm_lux_v8
+SKIN=03_red_eagle_65
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+[CAR_17]
+MODEL=rss_gtm_mercer_v8
+SKIN=01_rss_performance_86
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+[CAR_18]
+MODEL=rss_gtm_mercer_v8
+SKIN=05_rainbow_23
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+[CAR_19]
+MODEL=rss_gtm_protech_p92_f6
+SKIN=01_rss_racing_18
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+[CAR_20]
+MODEL=rss_gtm_protech_p92_f6
+SKIN=03_electron_racing_48
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+[CAR_21]
+MODEL=rss_gtm_protech_p92_f6
+SKIN=04_powell_72
+SPECTATOR_MODE=0
+DRIVERNAME=
+TEAM=
+GUID=
+BALLAST=0
+RESTRICTOR=0
+
+
+```
+
+## plugin_race_tracker_cfg.yml
+```yml
+# yaml-language-server: $schema=schemas/plugin_race_tracker_cfg.schema.json
+
+# API endpoint
+ApiEndpoint: https://simcap.thedevlog.net
+# API key
+ApiKey: redacted
+# The unique ID that will be sent as part of the API POST request
+ServerId: 'simcap-quickrace'
+# The game slug
+Game: assetto-corsa
+# The game event id
+RaceId: '123456789'
+
+```
+

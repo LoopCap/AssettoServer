@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomCommandPlugin", "Cust
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReplayPlugin", "ReplayPlugin\ReplayPlugin.csproj", "{85A4319F-EB8C-4CC3-B107-6C319E537EB8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceTrackerPlugin", "RaceTrackerPlugin\RaceTrackerPlugin.csproj", "{85A4319F-EB8C-4CC3-B107-6C319E537EB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
